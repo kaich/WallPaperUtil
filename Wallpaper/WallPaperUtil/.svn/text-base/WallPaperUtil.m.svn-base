@@ -1,0 +1,68 @@
+//
+//  ViewController.m
+//  WallpaperTest
+//
+//  Created by erike on 09/06/14.
+//  Copyright (c) 2014 erik. All rights reserved.
+//
+
+#import "WallPaperUtil.h"
+#import "PLPhotoLibrary.h"
+#include <dlfcn.h>
+
+
+@interface WallPaperUtil ()
+
+@end
+
+@implementation WallPaperUtil
+
+- (id)initWithWallPaperImage:(UIImage*) image
+{
+
+    self = [self initWithUIImage:image];
+    _wallpaperMode=PLWallpaperModeHomeScreen;
+    return self;   
+}
+
++(WallPaperUtil*) setImageAsHomeScreenAndLockScreenWithImage:(UIImage *) image viewScale:(BOOL)isScale
+{
+    WallPaperUtil * vc =[[WallPaperUtil alloc] initWithWallPaperImage:image];
+    vc.allowsEditing = false;
+    vc.colorSamplingEnabled=false;
+    vc.saveWallpaperData = true;
+    [vc motionToggledManually:isScale ? true : false];
+    [vc setImageAsHomeScreenAndLockScreenClicked:nil];
+    return vc;
+}
+
+
++(WallPaperUtil*) setImageAsHomeScreen:(UIImage *)image  viewScale:(BOOL)isScale
+{
+
+    WallPaperUtil * vc =[[WallPaperUtil alloc] initWithWallPaperImage:image];
+    vc.allowsEditing = false;
+    vc.colorSamplingEnabled=false;
+    vc.saveWallpaperData = true;
+    [vc motionToggledManually:isScale ? true : false];
+    [vc setImageAsHomeScreenClicked:nil];
+    
+    
+    return vc;
+}
+
+
++(WallPaperUtil*) setImageAsLockScreenWithImage:(UIImage*) image viewScale:(BOOL)isScale
+{
+    WallPaperUtil * vc =[[WallPaperUtil alloc] initWithWallPaperImage:image];
+    vc.allowsEditing = false;
+    vc.colorSamplingEnabled=false;
+    vc.saveWallpaperData = true;
+    [vc motionToggledManually:isScale ? true : false];
+    [vc setImageAsLockScreenClicked:nil];
+    
+    return vc;
+}
+
+
+@end
